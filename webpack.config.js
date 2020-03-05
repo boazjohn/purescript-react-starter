@@ -3,7 +3,7 @@ var path = require("path");
 var webpack = require("webpack");
 var copyPlugin = require("copy-webpack-plugin");
 var miniCssExtractPlugin = require("mini-css-extract-plugin");
-// var htmlPlugin = require("html-webpack-plugin");
+var htmlPlugin = require("html-webpack-plugin");
 
 const isWebpackDevServer = process.argv.some(
   a => path.basename(a) === "webpack-dev-server"
@@ -35,6 +35,20 @@ module.exports = {
     new miniCssExtractPlugin({
       moduleFilename: ({ name }) => `stylesheets/${name}.css`
     }),
+    new htmlPlugin({
+      template: "html/index.ejs",
+      inject: false,
+      templateParameters: (compilation, assets, assetTags, options) => {
+        return {
+          htmlWebpackPlugin: {
+            files: {
+              js: assets.js,
+              css: assets.css
+            }
+          }
+        };
+      }
+    })
   ],
   module: {
     rules: [
