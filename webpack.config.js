@@ -1,11 +1,9 @@
 /* eslint-disable */
 var path = require("path");
 var webpack = require("webpack");
-// var copyPlugin = require("copy-webpack-plugin");
+var copyPlugin = require("copy-webpack-plugin");
 var miniCssExtractPlugin = require("mini-css-extract-plugin");
 // var htmlPlugin = require("html-webpack-plugin");
-// var Dotenv = require("dotenv-webpack");
-// require("dotenv").config();
 
 const isWebpackDevServer = process.argv.some(
   a => path.basename(a) === "webpack-dev-server"
@@ -29,7 +27,15 @@ module.exports = {
     port: 8082,
     hot: true
   },
-
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new copyPlugin([
+      { from: "html/index.html", to: "." }
+    ]),
+    new miniCssExtractPlugin({
+      moduleFilename: ({ name }) => `stylesheets/${name}.css`
+    }),
+  ],
   module: {
     rules: [
       {

@@ -13,7 +13,7 @@ import Web.HTML.Window (document)
 
 app = R.text "Hello World!"
 
--- foreign import style :: Unit
+foreign import style :: Unit
 
 main :: Unit
 main =

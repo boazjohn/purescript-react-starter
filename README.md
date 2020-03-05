@@ -13,15 +13,17 @@ yarn spago install
 
 ## Running
 
+```
+yarn start 
+```
+... starts the dev-server with hot reloading.
+
+
+## Bundling
+
 ```bash
 yarn webpack
 ```
-... and open `html/index.html`
-
-Ideally the `index.html` has to be bundled into webpack.
+... and open `dist/index.html` to check things.
 
 
-## TODO
-1. Webpack dev server
-2. Style loader
-3. Assets bundling
